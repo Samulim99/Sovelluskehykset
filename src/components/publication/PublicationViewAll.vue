@@ -1,10 +1,10 @@
 <script setup>
 import PublicationView from './PublicationView.vue';
-import PublicationService from '../../services/publicationService'
 import { useRouter } from 'vue-router';
+import { publicationService } from '../../services/publicationService';
 
 const router = useRouter()
-const { data, error, isFinished } = PublicationService.useGetAll()
+const { data, error, isFinished } = publicationService.useGetAll()
 
 
 </script>

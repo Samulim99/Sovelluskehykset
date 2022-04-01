@@ -1,8 +1,8 @@
 import { useApi } from "../composables/api"
 
-export default {
+export const publicationService = {
 
-    useGetById() {
+    useGetById(publicationId) {
         return useApi(`/publications/${publicationId}`).json()
     },
 

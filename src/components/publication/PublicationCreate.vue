@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive, unref } from 'vue';
-import PublicationService from '../../services/publicationService';
+import { publicationService } from '../../services/publicationService';
 
 const publicationData = reactive({
     title: '',
@@ -29,7 +29,7 @@ const createNewPublication = async () => {
 
     if (!isDataValid.value.isAllValid) return
 
-    const { data, error } = await PublicationService.usePost(publicationData)
+    const { data, error } = await publicationService.usePost(publicationData)
 
     if (data.value && !error.value) {
         publicationData.title = ''
