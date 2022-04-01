@@ -1,5 +1,6 @@
 <script setup>
-import { computed, reactive } from 'vue';
+import { computed, reactive, unref } from 'vue';
+import PublicationService from '../../services/publicationService';
 
 const publicationData = reactive({
     title: '',
@@ -9,49 +10,52 @@ const publicationData = reactive({
     tags: []
 })
 
-const isDataValid = computed(()=>{
+const isDataValid = computed(() => {
 
-    return !!(publicationData.title && publicationData.description && publicationData.url)
+    const urlValidation = publicationData.url.includes('https://')
+    const descriptionValidation = publicationData.description.length < 1000 && publicationData.description.length > 0
+    const titleValidation = publicationData.title.length > 2
+
+    return {
+        urlValidation: urlValidation ? 'OK' : 'Vain https osoitteet ovat sallittu',
+        descriptionValidation: descriptionValidation ? 'OK' : 'Kuvauksen teksti on liian pitkä',
+        titleValidation: titleValidation ? 'OK' : 'Otsikon täytyy olla ainakin kolme merkkiä pitkä',
+        isAllValid: urlValidation && descriptionValidation && titleValidation
+    }
 
 })
 
-const createNewPublication = () => {
+const createNewPublication = async () => {
 
-    if(!isDataValid.value) return
+    if (!isDataValid.value.isAllValid) return
 
+    const { data, error } = await PublicationService.usePost(publicationData)
 
-    publicationData.title = ''
-    publicationData.description = ''
-    publicationData.url = ''
+    if (data.value && !error.value) {
+        publicationData.title = ''
+        publicationData.description = ''
+        publicationData.url = ''
+    }
 }
 
-/* 
-
-{
-    "title":"title",
-    "description":"kuvaus",
-    "url":"https://i.redd.it/4abzoaca95p81.jpg",
-    "visibility":2,
-    "tags":[]
-}
-
-*/
 
 </script>
 
 <template>
-
     <div class="publication-form">
         <label>Otsikko</label>
         <input v-model="publicationData.title" type="text" />
 
+        <small>{{ isDataValid.titleValidation }}</small>
         <label>Kuvaus</label>
         <input v-model="publicationData.description" type="text" />
 
+        <small>{{ isDataValid.descriptionValidation }}</small>
         <label>URL</label>
         <input v-model="publicationData.url" type="text" />
 
-        <button :disabled="!isDataValid" @click="createNewPublication">Lähetä</button>
+        <small>{{ isDataValid.urlValidation }}</small>
+        <button :disabled="!isDataValid.isAllValid" @click="createNewPublication">Lähetä</button>
     </div>
 </template>
 
