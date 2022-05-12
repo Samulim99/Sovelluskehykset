@@ -1,3 +1,4 @@
+
 <script setup>
 import NavigationBar from '../navigation/NavigationBar.vue';
 
@@ -24,4 +25,4 @@ import NavigationBar from '../navigation/NavigationBar.vue';
     justify-content: center;
 }
 
-</style>
+</style>   

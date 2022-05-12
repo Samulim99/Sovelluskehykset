@@ -17,6 +17,13 @@ onClickOutside(target, () => {
     showLoginView.value = false
 })
 
+const login = async ()=>{
+    await authService.useLogin(credentials)
+
+    credentials.username = ''
+    credentials.password = ''
+}
+
 
 </script>
 
@@ -24,7 +31,7 @@ onClickOutside(target, () => {
     <div class="overlay">
  
 
-            <form ref="target" class="login" @submit.prevent="authService.useLogin(credentials)">
+            <form @submit.prevent = "login" ref="target" class="login">
 
                 <label>Käyttäjänimi</label>
                 <input v-model="credentials.username" type="text">
@@ -45,14 +52,14 @@ onClickOutside(target, () => {
 <style>
 .login {
     width: 250px;
-    padding: 20px;
     background-color: aquamarine;
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translateX(-50%) translateY(-50%);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 20px;
 }
 
 input {
@@ -60,8 +67,11 @@ input {
     flex: 6;
     /* width: 80%; */
 }
-label {
-    flex: 6;
+
+button{
+    margin-top: 6px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: aqua;
 }
 
 /* .overlay {
