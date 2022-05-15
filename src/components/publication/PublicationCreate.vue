@@ -63,8 +63,9 @@ const createNewPublication = async () => {
 .publication-form {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: flex;
     justify-content: space-between;
-    width: 200px;
+    width: 500px;
+    background-color: rgb(255, 99, 169);
 }
 </style>

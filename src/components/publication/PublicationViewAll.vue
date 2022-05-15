@@ -29,7 +29,7 @@ const { data, error, isFinished } = publicationService.useGetAll()
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgb(231, 231, 231);
+    background-color: aqua;
     margin: 20px;
 }
 

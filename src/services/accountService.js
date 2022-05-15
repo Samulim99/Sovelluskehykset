@@ -3,6 +3,6 @@ import { useApi } from "../composables/api"
 export const userService = {
 
     useGetAll() {
-        return useApi('/account').json()
+        return useApi('/users').json()
     }
 }

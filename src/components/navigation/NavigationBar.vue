@@ -39,6 +39,7 @@ const logout = async ()=>{
     display: flex;
     justify-content: center;
     position: fixed;
+    background-color: aquamarine;
     width: 100%;
     top: 0px;
 }
@@ -46,5 +47,6 @@ const logout = async ()=>{
 a {
     margin: 20px;
     font-size: 18px;
+    color: black;
 }
 </style>

@@ -37,7 +37,7 @@ import { getNotifications, removeNotificationByKey } from '../../composables/not
     max-width: 300px;
     cursor: pointer;
     padding: 10px;
-    border: solid 2px black;
+    border: solid 6px black;
     margin: 2px;
 
 }
